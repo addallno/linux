@@ -24,9 +24,10 @@ jobs:
           cd src
           cp ../cfg/ikconfig_n56.config .config
           ./scripts/config --disable USB_ETH
+          ./scripts/config --enable USB_CONFIGFS_ECM
           make LLVM=1 ARCH=arm64 olddefconfig
           echo "=== USB 关键项 ==="
-          grep -E 'CONFIG_USB_ETH|CONFIG_USB_CONFIGFS_SERIAL|CONFIG_USB_CONFIGFS=|CONFIG_USB_F_SERIAL' .config
+          grep -E 'CONFIG_USB_ETH|CONFIG_USB_CONFIGFS_SERIAL|CONFIG_USB_CONFIGFS_ECM=|CONFIG_USB_F_ECM' .config
       - name: build
         run: cd src && make LLVM=1 ARCH=arm64 -j$(nproc) Image
       - name: version
